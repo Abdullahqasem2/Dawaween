@@ -1,10 +1,9 @@
-const mongoose = require('mongoose')
-UserSchema.plugin(uniqueValidator);
+const mongoose = require('mongoose')  
+Schema = mongoose.Schema;
 const UserSchema = new mongoose.Schema({
     name:{
         type: String,
         required: [true, "Username should be added"],
-        unique: [true, "Username must be unique"],
         minlength: [5, "Username must be at least 5 characters"]
         },
     picture:{
