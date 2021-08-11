@@ -6,8 +6,6 @@ import {Box} from '@material-ui/core';
 
 
 const App = () => {
-
-
   return (
     <div>
     <Header />
