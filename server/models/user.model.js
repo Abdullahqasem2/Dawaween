@@ -1,10 +1,9 @@
 const mongoose = require('mongoose')
-UserSchema.plugin(uniqueValidator);
+Schema = mongoose.Schema;
 const UserSchema = new mongoose.Schema({
     name:{
         type: String,
         required: [true, "Username should be added"],
-        unique: [true, "Username must be unique"],
         minlength: [5, "Username must be at least 5 characters"]
         },
     picture:{
@@ -40,8 +39,7 @@ const UserSchema = new mongoose.Schema({
     }],
     comments:[{
         type: Schema.Types.ObjectId, ref: 'Comment'
-    }],  
+    }],
 }, {timestamps: true});
 
 module.exports.User = mongoose.model('User',UserSchema);
-

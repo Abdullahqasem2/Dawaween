@@ -6,11 +6,12 @@ import {Box} from '@material-ui/core';
 
 
 const App = () => {
-
+  const Dewaan = "Dawaween";
+  // const Dewaan = props.head;
 
   return (
     <div>
-    <Header />
+    <Header header={Dewaan} />
     <Box>
       <Home />
     </Box>
