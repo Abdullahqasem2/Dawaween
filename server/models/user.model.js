@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')  
+const mongoose = require('mongoose')
 Schema = mongoose.Schema;
 const UserSchema = new mongoose.Schema({
     name:{
@@ -39,8 +39,7 @@ const UserSchema = new mongoose.Schema({
     }],
     comments:[{
         type: Schema.Types.ObjectId, ref: 'Comment'
-    }],  
+    }],
 }, {timestamps: true});
 
 module.exports.User = mongoose.model('User',UserSchema);
-
