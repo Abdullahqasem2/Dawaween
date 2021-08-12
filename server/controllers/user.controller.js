@@ -51,7 +51,7 @@ module.exports.joinTrip = async (req, res) =>{
     let joinedTrip = await Trip.findOneAndUpdate({_id:req.params.idt},{
                 $push:{users: user}
             })
-            return res.json()
+            return res.json({message: "You joined the trip successfully"})
         }
         catch (err){
             console.log("catch")
@@ -63,12 +63,12 @@ module.exports.unjoinTrip = async (req, res) =>{
     try{   
     let trip = await Trip.findOne({_id:req.params.idt})
     let user = await User.findOneAndUpdate({_id: req.params.idu},{
-                 $pull:{trips: trip}
-            })
+                 $pull:{trips: trip._id}
+            },{ new: true})
     let joinedTrip = await Trip.findOneAndUpdate({_id:req.params.idt},{
-                $pull:{users: user}
-            })
-            return res.json()
+                $pull:{users: user._id}
+            },{ new: true})
+            return res.json({message: "You unjoined the trip successfully"})
         }
         catch (err){
             console.log("catch")

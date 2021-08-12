@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-mongoose.connect("mongodb://localhost/dawaween", {
+
+//changed DB name
+mongoose.connect("mongodb://localhost/dawaween_DB", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })

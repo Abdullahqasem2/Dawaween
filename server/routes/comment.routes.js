@@ -1,4 +1,5 @@
-const PostController = require('../controllers/post.controller');
+const PostController = require('../controllers/comment.controller');
 module.exports = function(app){
-    app.post('/api/post', PostController.createPost);
+    app.post('/api/comment/:uid/:pid', PostController.createNewComment);
+    app.get('/api/comment',PostController.findAllcomments);
 }
