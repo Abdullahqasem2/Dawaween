@@ -1,6 +1,9 @@
 const {Comment} = require('../models/comment.controller')
 const { Post } = require('../models/post.model');
 const { User } = require('../models/user.model');
+const jwt = require("jsonwebtoken");
+const bcrypt = require('bcrypt');
+require("dotenv").config();
 
 module.exports.createcomment = (request, response) => {
   const { text } = request.body;

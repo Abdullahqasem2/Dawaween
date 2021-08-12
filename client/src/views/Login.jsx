@@ -71,14 +71,15 @@ const Login = (props) => {
         e.preventDefault();
         axios.post('http://localhost:8000/api/login', {
             email, password
-        }, { withCredentials: true })
+        })
+            .then(res=> console.log(res))
             .then(response => {
                 cookies.set("user",response.data.user);
                 setErrors("");
                 setOpen(false);
                 props.Registerd(!registerd);
             })
-            .catch((err) => setErrors("Invalid Login"))
+            .catch((err) => setErrors("Invalid Login"+err))
     };
     return (
         <div>
