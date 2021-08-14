@@ -2,7 +2,8 @@ import React,{useState,useEffect} from 'react'
 import "./NavBar.css"
 import {navigate} from '@reach/router';
 import Cookies from 'universal-cookie';
-const NavBar = (props) => {
+
+const SawalefNav = () => {
     const [toggleMenu, setToggleMenu] = useState(false);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const cookie = new Cookies()   
@@ -28,29 +29,20 @@ const homeHandler=()=>{
 const profileHandler=()=>{
     navigate("/user/"+ cookie.get('user').user._id)
 }
-const roomHandler=()=>{
-    navigate('/room')
-    
-}
-
-
-
-
 
     return (
-       <nav>
-           {
-            (toggleMenu || screenWidth > 500)&&(<ul className="list">
-                    <ui className="items" onClick={homeHandler}>Home</ui>
-                    <ui className="items"onClick={profileHandler}>Profile  </ui>
-                 <ui className="items" onClick={roomHandler}>Create Room</ui>
-                 
-           </ul>
-            )}
-           <button className="btn" onClick={toggleNav}>MENU</button>
-       
-       </nav>
+        <nav>
+        {
+         (toggleMenu || screenWidth > 500)&&(<ul className="list">
+                 <ui className="items" onClick={homeHandler}>Home</ui>
+                 <ui className="items"onClick={profileHandler}>Profile  </ui>
+              
+        </ul>
+         )}
+        <button className="btn" onClick={toggleNav}>MENU</button>
+    
+    </nav>
     )
 }
 
-export default NavBar
+export default SawalefNav

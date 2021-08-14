@@ -1,8 +1,8 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { makeStyles,ThemeProvider, createTheme } from '@material-ui/core/styles';
-
+import { makeStyles, ThemeProvider, createTheme } from '@material-ui/core/styles';
+import SawahNav from '../../Navbar/SawahNav'
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -23,11 +23,12 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(3, 0, 2),
 
     },
-    new: {        color:'#545454',
-    fontFamily: 'cursive',
-    fontSize: 'small',
-    fontWeight: '900',
-},
+    new: {
+        color: '#545454',
+        fontFamily: 'cursive',
+        fontSize: 'small',
+        fontWeight: '900',
+    },
 }));
 
 const Form = (props) => {
@@ -38,37 +39,35 @@ const Form = (props) => {
     const [errors, setErrors] = useState("");
     const handleForm = (e) => {
         e.preventDefault();
-        if(props.kind === "post")
-        props.wallFormAction({text, channel});
+        if (props.kind === "post")
+            props.wallFormAction({ text, channel });
         else
-        props.wallFormAction({text},postid);
+            props.wallFormAction({ text }, postid);
     }
 
     return (
-        <div>
-            <form className={classes.form} noValidate onSubmit={handleForm}>
-                <TextField
-                    variant="outlined"
-                    margin="normal"
-                    fullWidth
-                    id="post"
-                    label="Share your thoughts..."
-                    name="post"
-                    autoComplete="post"
-                    autoFocus
-                    onChange={(e) => setText(e.target.value)}
-                    error={errors}
-                />
-                <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    className={classes.submit}
-                >
+        <form className={classes.form} noValidate onSubmit={handleForm}>
+            <TextField
+                variant="outlined"
+                margin="normal"
+                fullWidth
+                id="post"
+                label="Share your thoughts..."
+                name="post"
+                autoComplete="post"
+                autoFocus
+                onChange={(e) => setText(e.target.value)}
+                error={errors}
+            />
+            <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+            >
                 {props.kind}
-                </Button>
-            </form>
-        </div>
+            </Button>
+        </form>
     )
 }
 

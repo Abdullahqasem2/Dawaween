@@ -98,7 +98,7 @@ const HomePage = () => {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                  <Link to="/room" >
+                  <Link to="/shuriken/wall" >
                     <Button variant="contained" color="primary">
                     Go to Shuriken D1
                   </Button>
