@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PostsForm from '../components/Wall/Form/Form'
+import SawahNav from '../../../client/src/components/Navbar/SawahNav'
 import Cookies from 'universal-cookie'
 import axios from 'axios'
 import { makeStyles,ThemeProvider, createTheme } from '@material-ui/core/styles';
@@ -77,6 +78,7 @@ const Wall = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.background}>
+        <SawahNav />
             <Head></Head>
             <h2 className={classes.header}>Welcome D1Gs to {props.type}'s wall</h2>
             <PostsForm kind="post" postid="" type="Sawwah" wallFormAction={createPost}></PostsForm>

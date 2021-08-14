@@ -10,13 +10,14 @@ import Room from './components/Shuriken/Room';
 import Map from './components/Sawwah/Map/Map';
 import Wall from './views/Wall'
 import UserProfile from './components/UserProfile/UserProfile'
-import Trip from './components/Trip/Trip'
+import ShurikenWall from './components/Shuriken/ShurikenWall';
 
 // import Home from './components/Home/Home';
 
 
-const App = () => {
+const App = (props) => {
   const Dewaan = "Dawaween";
+  const room="room";
   // const Dewaan = props.head;
 
   return (
@@ -29,8 +30,10 @@ const App = () => {
           <HomePage path="/"  />
           <Trip path="travel" />
           <CreateRoom path="/room" />
+          <ShurikenWall path="/shuriken/wall" />
           <Room path="/room/:roomID" />
           <UserProfile path="/user/:id"></UserProfile>
+          <CreateRoom path="/room"/>
       </Router>
     </Box>
     </div>

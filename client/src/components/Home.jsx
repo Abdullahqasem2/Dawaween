@@ -4,7 +4,7 @@ import { getPlacesData, getWeatherData } from './Api/Api';
 import Search from './Header/Search';
 import List from './Sawwah/List/List';
 import Map from './Sawwah/Map/Map';
-
+import SawahNav from './Navbar/SawahNav';
 const Home = () => {
   const [type, setType] = useState('restaurants');
   const [rating, setRating] = useState('');
@@ -57,8 +57,8 @@ const Home = () => {
 
   return (
     <div>
+      <SawahNav/>
       <CssBaseline />
-      
       <Grid container spacing={3} style={{ width: '100%' }}>
         <Grid item xs={12} md={4}>
           <List
