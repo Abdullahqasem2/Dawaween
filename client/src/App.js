@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import axios from 'axios';
 import Home from './components/Home';
 import Header from './components/Header/Header';
@@ -9,6 +9,7 @@ import CreateRoom from './components/Shuriken/CreateRoom';
 import Room from './components/Shuriken/Room';
 import Map from './components/Sawwah/Map/Map';
 import Wall from './views/Wall'
+import UserProfile from './components/UserProfile/UserProfile'
 
 // import Home from './components/Home/Home';
 
@@ -27,7 +28,7 @@ const App = () => {
           <HomePage path="/"  />
           <CreateRoom path="/room" />
           <Room path="/room/:roomID" />
-        
+          <UserProfile path="/user/:id"></UserProfile>
       </Router>
     </Box>
     </div>
