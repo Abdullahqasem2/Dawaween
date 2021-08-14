@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { makeStyles,ThemeProvider, createTheme } from '@material-ui/core/styles';
 
+
 const useStyles = makeStyles((theme) => ({
     paper: {
         marginTop: theme.spacing(8),
@@ -20,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
+
     },
     new: {        color:'#545454',
     fontFamily: 'cursive',
@@ -32,14 +34,14 @@ const Form = (props) => {
     const [text, setText] = useState("");
     const classes = useStyles();
     const channel = props.type;
+    const postid = props.postid;
     const [errors, setErrors] = useState("");
     const handleForm = (e) => {
         e.preventDefault();
         if(props.kind === "post")
         props.wallFormAction({text, channel});
         else
-        props.wallFormAction({text});
-        
+        props.wallFormAction({text},postid);
     }
 
     return (
@@ -59,12 +61,11 @@ const Form = (props) => {
                 />
                 <Button
                     type="submit"
-                    fullWidth
                     variant="contained"
                     color="primary"
                     className={classes.submit}
                 >
-                {props.type}
+                {props.kind}
                 </Button>
             </form>
         </div>

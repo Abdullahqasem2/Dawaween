@@ -1,5 +1,7 @@
-const mongoose = require('mongoose')
-Schema = mongoose.Schema;
+const bcrypt = require('bcrypt');
+const mongoose = require('mongoose');
+//
+// const Schema = mongoose.Schema;
 const UserSchema = new mongoose.Schema({
     name:{
         type: String,
@@ -9,13 +11,15 @@ const UserSchema = new mongoose.Schema({
     picture:{
         type: String
     },
+    email:{
+      type: String
+    },
     age:{
         type: Number,
         required: [true, "Please add your age"]
     },
     gender:{
         type: String,
-        enum: ['Male','Female'],
         required: [true, "Please add your gender"]
     },
     interests:[{
@@ -32,14 +36,42 @@ const UserSchema = new mongoose.Schema({
         minlength: [8, "Password must be at least 8 characters"]
     },
     trips:[{
-        type: Schema.Types.ObjectId, ref: 'Trip'
+        type: mongoose.Schema.Types.ObjectId, ref: 'Trip'
     }],
     posts:[{
-        type: Schema.Types.ObjectId, ref: 'Post'
+        type: mongoose.Schema.Types.ObjectId, ref: 'Post'
     }],
     comments:[{
-        type: Schema.Types.ObjectId, ref: 'Comment'
+        type: mongoose.Schema.Types.ObjectId, ref: 'Comment'
     }],
 }, {timestamps: true});
 
+
+UserSchema.virtual('confirmPassword')
+.get( () => this._confirmPassword )
+.set( value => this._confirmPassword = value );
+
+UserSchema.pre('save', function(next) {
+    bcrypt.hash(this.password, 10)
+    .then(hash => {
+        this.password = hash;
+        next();
+    });
+});
+
+UserSchema.pre('validate', function(next) {
+  console.log(this.password + " --------------- " + this.confirmPassword)
+    if (this.password !== this.confirmPassword) {
+        this.invalidate('confirmPassword', 'Password must match confirm password');
+    }
+    next();
+});
 module.exports.User = mongoose.model('User',UserSchema);
+
+// const bcrypt = require('bcrypt');
+// const payload = {
+//     id: user._id
+// };
+
+  // notice that we're using the SECRET_KEY from our .env file
+// const userToken = jwt.sign(payload, process.env.SECRET_KEY);

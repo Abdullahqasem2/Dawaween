@@ -1,12 +1,36 @@
 const {User} = require('../models/user.model')
 const {Trip} = require('../models/trip.model')
+const jwt = require("jsonwebtoken");
+const bcrypt = require('bcrypt');
+require("dotenv").config();
+const { authenticate } = require('../config/jwt.config');
+
+module.exports.Register = (request, res) => {
+  console.log(request.body);
+    User.create(request.body)
+        .then(user => {
+          console.log(user);
+            const userToken = jwt.sign({
+                id: user._id
+            }, process.env.FIRST_SECRET_KEY)
+            res
+                .cookie("usertoken", userToken, {
+                    httpOnly: true
+                })
+                .json({ msg: "success!", user: user, token: userToken });
+        })
+        .catch(err => {
+          console.log(err)
+          res.status(400).json(err)
+        });
+}
 
 module.exports.findAllUsers = (req, res) => {
     User.find()
         .then(allUsers => res.json(allUsers))
         .catch(err => res.json(err))
 }
- 
+
 module.exports.findOneSingleUser = (req, res) => {
     User.findOne({ _id: req.params.id })
         .then(oneSingleUser => res.json(oneSingleUser))
@@ -20,12 +44,36 @@ module.exports.findUsersByTrip = (req, res) => {
         .catch(err => res.json(err))
 }
 
-module.exports.createNewUser = (req, res) => {
-    User.create(req.body)
-        .then(newlyCreatedUser => res.json(newlyCreatedUser))
-        .catch(err => res.status(400).json(err))
+
+module.exports.login = async (req, res) => {
+    const user = await User.findOne({ email: req.body.email })
+    .then(res => console.log(user))
+    .catch(err => console.log("asd"+err));
+    if (user === null) {
+      console.log("user");
+        return res.sendStatus(400);
+    }
+    const correctPassword = await bcrypt.compare(req.body.password, req.body.password);
+    if (!correctPassword) {
+      console.log("asd")
+        return res.sendStatus(400);
+    }
+    const userToken = jwt.sign({
+
+        id: user._id
+    }, process.env.FIRST_SECRET_KEY);
+    res.cookie("usertoken", userToken, {
+            httpOnly: true
+        })
+        .json({ msg: "success!", user: user, token: userToken })
+
 }
- 
+module.exports.logout =  (req, res) => {
+    res.clearCookie('usertoken');
+    res.clearCookie('user');
+    res.sendStatus(200);
+}
+
 module.exports.updateExistingUser = (req, res) => {
     User.findOneAndUpdate(
         { _id: req.params.id },
@@ -35,7 +83,7 @@ module.exports.updateExistingUser = (req, res) => {
         .then(updatedUser => res.json(updatedUser))
         .catch(err => res.status(400).json(err));
 }
- 
+
 module.exports.deleteAnExistingUser = (req, res) => {
     User.deleteOne({ _id: req.params.id })
         .then(result => res.json({ result: result }))
@@ -43,7 +91,7 @@ module.exports.deleteAnExistingUser = (req, res) => {
 }
 
 module.exports.joinTrip = async (req, res) =>{
-    try{   
+    try{
     let trip = await Trip.findOne({_id:req.params.idt})
     let user = await User.findOneAndUpdate({_id: req.params.idu},{
                  $push:{trips: trip}
@@ -60,7 +108,7 @@ module.exports.joinTrip = async (req, res) =>{
 }
 
 module.exports.unjoinTrip = async (req, res) =>{
-    try{   
+    try{
     let trip = await Trip.findOne({_id:req.params.idt})
     let user = await User.findOneAndUpdate({_id: req.params.idu},{
                  $pull:{trips: trip._id}

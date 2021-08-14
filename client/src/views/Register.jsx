@@ -66,10 +66,14 @@ const theme = createTheme({
 })
 
 const Register = (props) => {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
+    const [name, setName] = useState('');
+    const [age, setAge] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [gender, setGender] = useState('');
+    const [interests, setInterests] = useState('');
+    const [origin, setOrigin] = useState('');
     const [errors, setErrors] = useState([]);
     const cookies = new Cookies();
     const [registerd, setRegisterd] = useState(false);
@@ -85,9 +89,10 @@ const Register = (props) => {
 
     const register = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8000/api/register', {
-            firstName, lastName, email, password
-        }, { withCredentials: true })
+        console.log(confirmPassword);
+        axios.post('http://localhost:8000/api/create', {
+            name,email,age,gender,interests,password,confirmPassword,origin
+        })
             .then(response => {
                 cookies.set("user",response.data);
                 setErrors("");
@@ -116,13 +121,13 @@ const Register = (props) => {
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     autoComplete="name"
-                                    name="Name"
+                                    name="name"
                                     variant="outlined"
                                     required
                                     fullWidth
                                     id="Name"
                                     label="Name"
-                                    onChange={(e) => setFirstName(e.target.value)}
+                                    onChange={(e) => setName(e.target.value)}
                                     autoFocus
                                 />
                             </Grid>
@@ -134,15 +139,15 @@ const Register = (props) => {
                                     id="age"
                                     label="age"
                                     name="age"
-                                    onChange={(e) => setLastName(e.target.value)}
+                                    onChange={(e) => setAge(e.target.value)}
                                     autoComplete="lname"
                                 />
                             </Grid>
                             <Grid item xs={12}>
-                                {firstName.length?
-                            <div>{(firstName.length)<3 ? <small style={{color:"red"}}>First Name should be atleast 2 char</small>:<small></small>}</div>:""}
-                            {lastName.length?
-                            <div>{(lastName.length)<3 ? <small style={{color:"red"}}>Last Name should be atleast 2 char</small>:<small></small>}</div>:""}
+                                {name.length?
+                            <div>{(name.length)<3 ? <small style={{color:"red"}}>Name should be atleast 2 char</small>:<small></small>}</div>:""}
+                            {age.length?
+                            <div>{(age.length)<2 ? <small style={{color:"red"}}>Age should be atleast 2 char</small>:<small></small>}</div>:""}
                                 <TextField
                                     variant="outlined"
                                     required
@@ -169,11 +174,50 @@ const Register = (props) => {
                                     autoComplete="current-password"
                                 />
                             </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    name="confirmPassword"
+                                    label="confirm Password"
+                                    type="password"
+                                    id="password"
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                    autoComplete="current-password"
+                                />
+                            </Grid>
                             {password.length?
                             <div>{(password.length)<8 ? <small style={{color:"red"}}>Password should be atleast 8 char</small>:<small></small>}</div>:""}
                             <small style={{color:"red"}}>{errors}</small>
+                            <Grid item xs={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    name="origin"
+                                    label="Origin"
+                                    type="Origin"
+                                    id="Origin"
+                                    onChange={(e) => setOrigin(e.target.value)}
+                                    autoComplete="current-password"
+                                />
+                            </Grid>
                         </Grid>
                       <Grid container spacing={2}>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                autoComplete="gender"
+                                name="gender"
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="gender"
+                                label="gender"
+                                onChange={(e) => setGender(e.target.value)}
+                                autoFocus
+                            />
+                        </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 autoComplete="interests"
@@ -183,20 +227,7 @@ const Register = (props) => {
                                 fullWidth
                                 id="interests"
                                 label="interests"
-                                onChange={(e) => setFirstName(e.target.value)}
-                                autoFocus
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                autoComplete="origin"
-                                name="origin"
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="origin"
-                                label="origin"
-                                onChange={(e) => setFirstName(e.target.value)}
+                                onChange={(e) => setInterests(e.target.value)}
                                 autoFocus
                             />
                         </Grid>

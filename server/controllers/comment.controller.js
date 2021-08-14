@@ -1,6 +1,9 @@
 const {Comment} = require('../models/comment.model')
 const { Post } = require('../models/post.model');
 const { User } = require('../models/user.model');
+const jwt = require("jsonwebtoken");
+const bcrypt = require('bcrypt');
+require("dotenv").config();
 
 module.exports.createcomment = (request, response) => {
   const { text } = request.body;
@@ -18,16 +21,22 @@ module.exports.createNewComment = async (request, response) => {
       const { text } = request.body;
       try{
           let newComment =await Comment.create({text})
-          let user= await User.findByIdAndUpdate({'_id':request.params.uid},{$push:{comments:newComment}})
-          let post=await Post.findByIdAndUpdate({'_id':request.params.pid},{$push:{comments:newComment}})
-          let updatedComment = await Comment.findByIdAndUpdate({'_id':newComment._id},{$push:{user:user},$push:{post:post}})
+          let user= await User.findOneAndUpdate({_id:request.params.uid},{$push:{comments:newComment}},{ new: true,useFindAndModify: false})
+          let post=await Post.findOneAndUpdate({_id:request.params.pid},{$push:{comments:newComment}},{ new: true,useFindAndModify: false})
+          let updatedComment = await Comment.findOneAndUpdate({_id:newComment._id},{$push:{post:post,user:user}},{ new: true,useFindAndModify: false})
           return response.json(updatedComment)
       }
       catch{err => response.status(400).json(err)}
 }
 
 module.exports.findAllcomments = (request,response) => {
-  Comment.find({})
+  Comment.find({}).populate('user')
+  .then(res => response.json(res))
+  .catch(err => response.json(err))
+}
+
+module.exports.findOneComment = (request,response) => {
+  Comment.findOne({}).populate('user')
   .then(res => response.json(res))
   .catch(err => response.json(err))
 }
