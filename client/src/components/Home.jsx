@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { CssBaseline, Grid } from '@material-ui/core';
-
 import { getPlacesData, getWeatherData } from './Api/Api';
-import Header from './Header/Header';
+import Search from './Header/Search';
 import List from './Sawwah/List/List';
 import Map from './Sawwah/Map/Map';
 
@@ -59,7 +58,7 @@ const Home = () => {
   return (
     <div>
       <CssBaseline />
-      <Header header="Dawaween" onPlaceChanged={onPlaceChanged} onLoad={onLoad} />
+      
       <Grid container spacing={3} style={{ width: '100%' }}>
         <Grid item xs={12} md={4}>
           <List

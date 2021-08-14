@@ -41,7 +41,6 @@ const useStyles = makeStyles((theme) => ({
         // backgroundImage:'url("https://images.unsplash.com/photo-1534534573898-db5148bc8b0c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=375&q=80")',
     }
 }))
-
 const Wall = (props) => {
     const [posts,setPosts] =useState([])
     const [comments, setComments] = useState([])
@@ -56,13 +55,16 @@ const Wall = (props) => {
             setLoaded(true)
             setRerender(false)
         })
+        .catch(err => console.log(err))
     }, [rerender])
 
 
     const createPost = (post) => {
         axios.post('http://localhost:8000/api/post/'+ cookies.get('user').user._id, post)
         .then(res => {setPosts([...posts,res.data])})
+        .then(console.log(posts))
         .then(setRerender(true))
+
     }
 
     const createComment = ({text},postid) => {
@@ -125,7 +127,7 @@ const Wall = (props) => {
                 <PostsForm kind="comment" type="Sawwah" postid={item._id} wallFormAction={createComment}></PostsForm>
                 </Comment></Card></div>
             })}
-        </div>
+            </div>
     )
 }
 export default Wall
