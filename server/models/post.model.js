@@ -11,12 +11,12 @@ const PostSchema = new mongoose.Schema({
         enum:['Shuriken','Sawwah'],
         default:"Shuriken"
     },
-    user:{
+    user:[{
         type: Schema.Types.ObjectId, ref: 'User'
-    },
+    }],
     comments:[{
         type: Schema.Types.ObjectId, ref: 'Comment'
-    }]
+    }],
 
 }, {timestamps: true});
 

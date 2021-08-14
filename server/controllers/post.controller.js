@@ -1,17 +1,21 @@
 const { Post } = require('../models/post.model');
 const { User } = require('../models/user.model');
 
-module.exports.createPost = (request, response) => {
-  const { text, channel } = request.body;
-  const uid = request.params.uid;
-  const user = User.findOne({_id:uid})
-    Post.create({text, channel})
-    .then(post => Post.findOneAndUpdate({_id:post._id}, {$push:{user:user}}))
-    .then(post => User.findOneAndUpdate({_id:uid}, {$push:{posts:post}}))
-    .catch(err => response.json(err));
+module.exports.createNewPost = async (request, response) => {
+      const { text, channel } = request.body;
+      console.log(request.params.uid)
+      try{
+          let newPost =await Post.create({text, channel})
+          let user= await User.findOneAndUpdate({'_id':request.params.uid},{$push:{posts:newPost}},{ new: true,useFindAndModify: false})
+          let addedpost=await Post.findOneAndUpdate({'_id':newPost._id},{$push:{user:user}},{ new: true,useFindAndModify: false})
+          return response.json(addedpost)
+      }
+      catch{err => response.status(400).json(err)}
 }
+
 module.exports.findAllPosts = (request,response) => {
-  Post.find({})
+
+  Post.find({}).populate({path:'comments',populate:{path:'user'}}).populate('user')
   .then(res => response.json(res))
   .catch(err => response.json(err))
 }

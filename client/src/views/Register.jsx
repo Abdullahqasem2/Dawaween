@@ -14,7 +14,8 @@ import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles, ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+//changed something
+import { makeStyles, ThemeProvider, createTheme } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { grey } from "@material-ui/core/colors";
 
@@ -53,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: '900',
 },
 }));
-const theme = createMuiTheme({
+const theme = createTheme({
     palette: {
         primary: {
             main: grey[800],
@@ -98,6 +99,7 @@ const Register = (props) => {
                 setOpen(false);
                 props.Registerd(!registerd);
             })
+            .then(navigate('/wall'))
             .catch(error => {setErrors("Please fill the empty fields"+error)
             })
     };
@@ -146,7 +148,7 @@ const Register = (props) => {
                                 {name.length?
                             <div>{(name.length)<3 ? <small style={{color:"red"}}>Name should be atleast 2 char</small>:<small></small>}</div>:""}
                             {age.length?
-                            <div>{(age.length)<3 ? <small style={{color:"red"}}>Age should be atleast 2 char</small>:<small></small>}</div>:""}
+                            <div>{(age.length)<2 ? <small style={{color:"red"}}>Age should be atleast 2 char</small>:<small></small>}</div>:""}
                                 <TextField
                                     variant="outlined"
                                     required

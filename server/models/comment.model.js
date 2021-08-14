@@ -6,13 +6,12 @@ const CommentSchema = new mongoose.Schema({
         required:[true,"please add text"],
         minlength:[1,"The comment should be at least 1 character"]
     },
-    user:{
+    user:[{
         type: Schema.Types.ObjectId, ref: 'User'
-    },
-    post:{
+    }],
+    post:[{
         type: Schema.Types.ObjectId, ref: 'Post'
-    }
-
+    }]
 }, {timestamps: true});
 
 module.exports.Comment = mongoose.model('Comment',CommentSchema);

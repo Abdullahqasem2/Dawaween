@@ -8,6 +8,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import { makeStyles,ThemeProvider, createTheme } from '@material-ui/core/styles';
 import {grey} from "@material-ui/core/colors";
+import {navigate} from '@reach/router';
 
 const Shadow = {
     backgroundColor: '#E6E6E6',
@@ -72,13 +73,13 @@ const Login = (props) => {
         axios.post('http://localhost:8000/api/login', {
             email, password
         })
-            .then(res=> console.log(res))
             .then(response => {
-                cookies.set("user",response.data.user);
+                cookies.set("user",response.data);
                 setErrors("");
                 setOpen(false);
                 props.Registerd(!registerd);
             })
+            .then(navigate('/wall'))
             .catch((err) => setErrors("Invalid Login"+err))
     };
     return (
