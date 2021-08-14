@@ -1,7 +1,7 @@
 const {User} = require('../models/user.model')
 const {Trip} = require('../models/trip.model')
 const jwt = require("jsonwebtoken");
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 require("dotenv").config();
 const { authenticate } = require('../config/jwt.config');
 
