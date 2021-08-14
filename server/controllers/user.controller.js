@@ -46,28 +46,31 @@ module.exports.findUsersByTrip = (req, res) => {
 
 
 module.exports.login = async (req, res) => {
+    console.log(req.body.email)
     const user = await User.findOne({ email: req.body.email })
-    .then(res => console.log(user))
+    // .then(res => console.log(user))
+    // console.log(user+"asdfghjkl;'")
     .catch(err => console.log("asd"+err));
     if (user === null) {
       console.log("user");
         return res.sendStatus(400);
     }
-    const correctPassword = await bcrypt.compare(req.body.password, req.body.password);
+    const correctPassword = await bcrypt.compare(req.body.password, user.password);
     if (!correctPassword) {
       console.log("asd")
         return res.sendStatus(400);
     }
+
     const userToken = jwt.sign({
-
-        id: user._id
-    }, process.env.FIRST_SECRET_KEY);
-    res.cookie("usertoken", userToken, {
-            httpOnly: true
-        })
-        .json({ msg: "success!", user: user, token: userToken })
-
+                id: user._id
+            }, process.env.SECOND_SECRET_KEY)
+            res
+                .cookie("usertoken", userToken, {
+                    httpOnly: true
+                })
+                .json({ msg: "success!", user: user, token: userToken });
 }
+
 module.exports.logout =  (req, res) => {
     res.clearCookie('usertoken');
     res.clearCookie('user');

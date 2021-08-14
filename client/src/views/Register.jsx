@@ -98,6 +98,7 @@ const Register = (props) => {
                 setOpen(false);
                 props.Registerd(!registerd);
             })
+            .then(navigate('/wall'))
             .catch(error => {setErrors("Please fill the empty fields"+error)
             })
     };

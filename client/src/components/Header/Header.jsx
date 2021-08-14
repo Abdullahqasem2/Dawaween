@@ -13,21 +13,21 @@ const Header = (props) => {
       <AppBar position="static" >
         <Toolbar className={classes.toolbar} >
             <Typography variant="h5" className={classes.title} >
-            {props.header}
+            Dawaween
             </Typography>
-            {props.header == "Dawaween"?
-            <div><Login />
-            <Register /></div>:
-            <h6>Welcome</h6>
-          }
+            
 
           <Box>
             {/* asd */}
               <div className={classes.search} >
                 <div className={classes.searchIcon} >
-                  <SearchIcon />
+                  {/*<SearchIcon />*/}
                 </div>
-                <InputBase placeholder="search..." classes={{root:classes.inputRoot, input: classes.inputInput}} />
+                {props.header != "Dawaween"?
+            <div style={{display:'flex'}} ><Login />|
+            <Register /></div>:
+            <h6>Welcome</h6>
+          }
               </div>
             {/* asd */}
           </Box>
