@@ -11,6 +11,7 @@ import Map from './components/Sawwah/Map/Map';
 import Wall from './views/Wall'
 import UserProfile from './components/UserProfile/UserProfile'
 import ShurikenWall from './components/Shuriken/ShurikenWall';
+import Trip from './components/Trip/Trip'
 
 // import Home from './components/Home/Home';
 
