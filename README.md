@@ -24,3 +24,24 @@ It will direct you to the Sawalef D1’s main page that contains a button in the
 - In R.V.C page you will be able to make a video call with a randomly 	D1G who already joined the Sawalef D1 and a button that changes the video to another D1G. 
 
 A navigation bar will be available in all pages to redirect the D1G to the main home page or to deifferent channel pages.
+
+## Registration and Log-in
+To sign in or sign up the user will find a button to the upper-right of the home page to direct him to the login and registration form. 
+Clicking on any of the main navigation bar buttons will also direct the user to the login/registration form.
+![regist](https://user-images.githubusercontent.com/81509430/129458919-1392abc6-9a06-41d3-b26c-316a8f7d8dbb.PNG)
+![sign-in](https://user-images.githubusercontent.com/81509430/129458921-dc8b1a4f-e83f-45b4-b2c1-704ce83abb59.PNG)
+## Technologies Used
+- MongoDb
+- React-Js
+- Sokit-io
+- Express
+- node-js
+- material-ui
+- Google API
+
+## Prepared By:
+   - Tasneem Arafat
+   - Abdullah Qasem
+   - Ahmad Albzoor
+
+
