@@ -3,8 +3,10 @@ const mongoose = require('mongoose');
 Schema = mongoose.Schema;
 const TripSchema = new mongoose.Schema({
     location:{
-        type: {type: String, default: 'Point'},
-        coordinates: {type: [Number]}
+        type: String,
+    },
+    description:{
+        type: String,
     },
     startDate:{
         type: Date,

@@ -10,6 +10,7 @@ import Room from './components/Shuriken/Room';
 import Map from './components/Sawwah/Map/Map';
 import Wall from './views/Wall'
 import UserProfile from './components/UserProfile/UserProfile'
+import Trip from './components/Trip/Trip'
 
 // import Home from './components/Home/Home';
 
@@ -26,6 +27,7 @@ const App = () => {
           <Wall path="/wall" type="Sawwah"/>
           <Home path="/sawwah" />
           <HomePage path="/"  />
+          <Trip path="travel" />
           <CreateRoom path="/room" />
           <Room path="/room/:roomID" />
           <UserProfile path="/user/:id"></UserProfile>

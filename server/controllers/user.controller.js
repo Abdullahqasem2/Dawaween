@@ -102,7 +102,7 @@ module.exports.joinTrip = async (req, res) =>{
     let joinedTrip = await Trip.findOneAndUpdate({_id:req.params.idt},{
                 $push:{users: user}
             })
-            return res.json({message: "You joined the trip successfully"})
+            return res.json(user)
         }
         catch (err){
             console.log("catch")
@@ -119,7 +119,7 @@ module.exports.unjoinTrip = async (req, res) =>{
     let joinedTrip = await Trip.findOneAndUpdate({_id:req.params.idt},{
                 $pull:{users: user._id}
             },{ new: true})
-            return res.json({message: "You unjoined the trip successfully"})
+            return res.json(user)
         }
         catch (err){
             console.log("catch")
