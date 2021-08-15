@@ -23,7 +23,7 @@ When you click on a marker on the map a badge of information for that destinatio
 Clicking on a trip will show that trip’s information including all users joining that trip, you can also click on any D1G who joined that trip 	to display their profile and review related information.
     		
 Also you can create a trip of your own to any destination for other D1Gs to view and join.
-![sawah](https://user-images.githubusercontent.com/81509430/129458616-64689ca1-7039-4c31-9005-f77961591df7.PNG)
+![sawah](https://cdn.discordapp.com/attachments/874250644834373672/876410666884419624/Screenshot_from_2021-08-15_13-21-26.png)
 ## D1 Sawalef:
 It will direct you to the Sawalef D1’s main page that contains a button in the 	middle of the page to redirect you to the Random Video Chat ( R.V.C ) page.
 - In R.V.C page you will be able to make a video call with a randomly 	D1G who already joined the Sawalef D1 and a button that changes the video to another D1G.
