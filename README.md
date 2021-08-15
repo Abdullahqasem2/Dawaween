@@ -3,7 +3,7 @@ Dawaween is a platform that provides a social media services in more than one to
 Each channel on our website is called D1(pronounced as “deewaan” and in Arabic slang it means conversation) and each user is named D1G (pronounced "deewangi" meaning someone who likes to talk).
 ## Home Page:
 When a user visits our website he will be directed to the home page, in the home 	page the user will read about our website and will see a navigation bar to all 	channels (D1s) in the website, but won't be able to go to any of them without signing in.
-![homePage](https://user-images.githubusercontent.com/81509430/129458329-1dfdb2fe-1669-4f3a-a0b7-53d3b6919bbc.PNG)
+![homePage](https://media.discordapp.net/attachments/874250644834373672/876408795549536296/Screenshot_from_2021-08-15_13-11-41.png?width=832&height=468)
 ## D1 Shuriken: 
 It will redirect you to the shuriken D1’s wall feed, in that page you will be able 	to write a post on that wall or comment on a post. On the top of shuriken’s wall feed there is a channel navbar with buttons to navigate you to different 	destinations in that channel:
    Profile:  this button will redirect you to your profile to display it or edit it.
